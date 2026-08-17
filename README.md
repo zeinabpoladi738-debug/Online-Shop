@@ -189,6 +189,10 @@ Then open Swagger to test the API.
 
 **Zeinab**
 
+## 📸 Project Preview
+
+![Online Shop Mainpage](./mainpage.png)
+
 Backend Developer | ASP.NET Core | C#
 
 ---
