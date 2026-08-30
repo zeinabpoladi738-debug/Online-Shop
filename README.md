@@ -62,6 +62,7 @@ Online Shop
 ## 📸 Project Preview
 
 ![Online Shop Mainpage](./mainpage.png)
+![Online Shop Swager](./swager.png)
 
 Backend Developer | ASP.NET Core | C#
 
