@@ -16,6 +16,9 @@ public class ShopDbContext : DbContext
 
     public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -31,5 +34,18 @@ public class ShopDbContext : DbContext
             .WithMany(x => x.Items)
             .HasForeignKey(x => x.ShoppingCartId)
             .OnDelete(DeleteBehavior.Cascade);
+
+
+        modelBuilder.Entity<Order>()
+        .HasMany(x => x.Items)
+        .WithOne(x => x.Order)
+        .HasForeignKey(x => x.OrderId)
+        .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<OrderItem>()
+            .HasOne(x => x.Product)
+            .WithMany()
+            .HasForeignKey(x => x.ProductId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

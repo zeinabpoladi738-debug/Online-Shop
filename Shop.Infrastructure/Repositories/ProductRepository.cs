@@ -1,46 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Shop.Application.Interfaces;
+﻿using Shop.Application.Interfaces;
 using Shop.Domain.Entities;
 using Shop.Infrastructure.Data;
 
 namespace Shop.Infrastructure.Repositories;
 
-public class ProductRepository : IProductRepository
+public class ProductRepository : BaseRepository<Product>, IProductRepository
 {
-    private readonly ShopDbContext _context;
-
     public ProductRepository(ShopDbContext context)
+        : base(context)
     {
-        _context = context;
-    }
-
-    public async Task<List<Product>> GetAllAsync()
-    {
-        return await _context.Products.ToListAsync();
-    }
-
-    public async Task<Product?> GetByIdAsync(int id)
-    {
-        return await _context.Products.FindAsync(id);
-    }
-
-    public async Task AddAsync(Product product)
-    {
-        await _context.Products.AddAsync(product);
-    }
-
-    public void Update(Product product)
-    {
-        _context.Products.Update(product);
-    }
-
-    public void Delete(Product product)
-    {
-        _context.Products.Remove(product);
-    }
-
-    public async Task SaveChangesAsync()
-    {
-        await _context.SaveChangesAsync();
     }
 }

@@ -1,10 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Shop.Application.Features.Basket.Commands.AddToBasket;
-using Shop.Application.Features.Basket.Commands.CreateBasket;
-using Shop.Application.Features.Basket.Queries.GetBasket;
+using Shop.Application.Features.Baskets.Commands.AddItemToBasket;
+using Shop.Application.Features.Baskets.Commands.ClearBasket;
+using Shop.Application.Features.Baskets.Commands.RemoveItemFromBasket;
+using Shop.Application.Features.Baskets.Commands.UpdateBasketItem;
+using Shop.Application.Features.Baskets.Queries.GetBasket;
 
-namespace Shop.API.Controllers;
+namespace Shop.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -17,28 +19,58 @@ public class BasketController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("{cartId}")]
-    public async Task<IActionResult> GetBasket(int cartId)
+    // GET: api/Basket/1
+    [HttpGet("{userId}")]
+    public async Task<IActionResult> GetBasket(int userId)
     {
         var result = await _mediator.Send(
-            new GetBasketQuery(cartId));
+            new GetBasketQuery
+            {
+                UserId = userId
+            });
 
         return Ok(result);
     }
 
-    [HttpPost("add")]
-    public async Task<IActionResult> AddToBasket(
-        [FromBody] AddToBasketCommand command)
-    {
-        var result = await _mediator.Send(command);
-
-        return Ok(result);
-    }
+    // POST: api/Basket
     [HttpPost]
-    public async Task<IActionResult> CreateBasket(
-    [FromBody] CreateBasketCommand command)
+    public async Task<IActionResult> AddItem(
+        AddItemToBasketCommand command)
     {
         var result = await _mediator.Send(command);
+
+        return Ok(result);
+    }
+
+    // PUT: api/Basket
+    [HttpPut]
+    public async Task<IActionResult> UpdateItem(
+        UpdateBasketItemCommand command)
+    {
+        var result = await _mediator.Send(command);
+
+        return Ok(result);
+    }
+
+    // DELETE: api/Basket/item
+    [HttpDelete("item")]
+    public async Task<IActionResult> RemoveItem(
+        RemoveItemFromBasketCommand command)
+    {
+        var result = await _mediator.Send(command);
+
+        return Ok(result);
+    }
+
+    // DELETE: api/Basket/1
+    [HttpDelete("{userId}")]
+    public async Task<IActionResult> ClearBasket(int userId)
+    {
+        var result = await _mediator.Send(
+            new ClearBasketCommand
+            {
+                UserId = userId
+            });
 
         return Ok(result);
     }
