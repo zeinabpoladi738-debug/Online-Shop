@@ -19,5 +19,7 @@ namespace Shop.Domain.Entities
         public ICollection<ShoppingCartItem> ShoppingCartItems { get; set; }
     = new List<ShoppingCartItem>();
 
+        public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+
     }
 }

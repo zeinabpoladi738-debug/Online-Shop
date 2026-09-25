@@ -15,7 +15,7 @@ namespace Shop.presentation.Controllers.V1
         {
             _mediator = mediator;   
         }
-
+        [HttpPost("Insert")]
         public async Task<IActionResult> Insert([FromBody] UserCommand userCommand)
         {
             var res = await _mediator.Send(userCommand);

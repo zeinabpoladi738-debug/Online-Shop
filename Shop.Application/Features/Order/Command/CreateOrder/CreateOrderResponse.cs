@@ -1,4 +1,4 @@
-﻿namespace Shop.Application.Features.Orders.Commands.CreateOrder;
+﻿namespace Shop.Application.Features.Order.Command.CreateOrder;
 
 public class CreateOrderResponse
 {

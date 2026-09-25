@@ -1,10 +1,10 @@
-﻿namespace Shop.Application.Features.Orders.Queries.GetOrderById;
+﻿namespace Shop.Application.Features.Order.Query.GetOrderById;
 
 public class GetOrderByIdResponse
 {
     public int OrderId { get; set; }
 
-    public int UserId { get; set; }
+    public int? UserId { get; set; }
 
     public DateTime OrderDate { get; set; }
 

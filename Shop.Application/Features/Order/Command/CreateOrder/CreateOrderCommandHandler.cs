@@ -2,15 +2,15 @@
 using Shop.Application.Interfaces;
 using Shop.Domain.Entities;
 
-namespace Shop.Application.Features.Orders.Commands.CreateOrder;
+namespace Shop.Application.Features.Order.Command.CreateOrder;
 
-public class CreateOrderHandler
-    : IRequestHandler<CreateOrderCommand, CreateOrderResponse>
+public class CreateOrderCommandHandler
+    : IRequestHandler<CreateOrderCommandRequest, CreateOrderResponse>
 {
     private readonly IBasketRepository _basketRepository;
     private readonly IOrderRepository _orderRepository;
 
-    public CreateOrderHandler(
+    public CreateOrderCommandHandler(
         IBasketRepository basketRepository,
         IOrderRepository orderRepository)
     {
@@ -18,12 +18,9 @@ public class CreateOrderHandler
         _orderRepository = orderRepository;
     }
 
-    public async Task<CreateOrderResponse> Handle(
-        CreateOrderCommand request,
-        CancellationToken cancellationToken)
+    public async Task<CreateOrderResponse> Handle(CreateOrderCommandRequest request, CancellationToken cancellationToken)
     {
-        var basket = await _basketRepository
-            .GetBasketWithItemsAsync(request.UserId);
+        var basket = await _basketRepository.GetBasketWithItemsAsync(request.CartId);
 
         if (basket == null || !basket.Items.Any())
         {
@@ -31,9 +28,10 @@ public class CreateOrderHandler
                 "Basket is empty.");
         }
 
-        var order = new Order
+        var order = new Shop.Domain.Entities.Order
         {
-            UserId = request.UserId,
+            CartId = request.CartId,    
+            UserId = null,
             OrderDate = DateTime.UtcNow,
             Status = OrderStatus.Pending
         };

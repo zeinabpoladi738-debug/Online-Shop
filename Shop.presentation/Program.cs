@@ -1,12 +1,24 @@
 using MediatR;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Shop.Application.Features.Products.Commands.CreateProduct;
 using Shop.Application.Interfaces;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Repositories;
+using Shop.Application.Features.User.Helper;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<ShopQueryDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("QueryDBConnection")));
+
+//Add service to the container
+//#region redisconfig
+builder.Services.AddStackExchangeRedisCache(option =>
+{ 
+    option.Configuration = builder.Configuration.GetValue<string>("CashSetting:RedisUrl");
+});
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -19,6 +31,10 @@ builder.Services.AddDbContext<ShopDbContext>(options =>
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOtpRedisRepository,OtpRedisRepository>();
+builder.Services.AddScoped<IUserQueryRepository, UserQueryRepository>();
+builder.Services.AddScoped<IUserCommandRepository, UserCommandRepository>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddMediatR(
     typeof(CreateProductHandler).Assembly);
@@ -35,6 +51,8 @@ builder.Services.AddCors(options =>
 });
 
 Auth.Extensions.AddJwt(builder.Services, builder.Configuration);
+
+
 
 var app = builder.Build();
 

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Shop.Application.Interfaces;
 using Shop.Domain.DTO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,8 +30,8 @@ namespace Shop.Infrastructure.Repositories
         public Task<Otp> AddAsync(Otp entity)
         {
             int time = Convert.ToInt32(_configuration.GetSection("Otp:OtpTime").Value);
-            _distributedCache.SetString(entity.UserId.ToSrting(), JasonConvert.SerializeObject(entity), new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(time)).SetAbsoluteExpiration(TimeSpan.FromMinutes(time)));
-            return true;
+            _distributedCache.SetString(entity.UserName.ToString(), JsonConvert.SerializeObject(entity), new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(time)).SetAbsoluteExpiration(TimeSpan.FromMinutes(time)));
+            return null;
         }
 
         public IQueryable<Otp> AsQueryable()
@@ -40,7 +41,8 @@ namespace Shop.Infrastructure.Repositories
 
         public Task<Otp> DeleteAsync(Otp entity)
         {
-            throw new NotImplementedException();
+            _distributedCache.RemoveAsync(entity.UserId.ToString());
+            return null;
         }
 
         public Task ExecuteTransactionAsync(Func<Task> action)
@@ -93,12 +95,22 @@ namespace Shop.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
+        public Task<Otp> Getdata(string mobile)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Otp?> GetLastRowAsync(Expression<Func<Otp, object>> orderByKey, CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         public Task<Otp?> GetOneAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert(Otp otp)
         {
             throw new NotImplementedException();
         }
@@ -114,6 +126,11 @@ namespace Shop.Infrastructure.Repositories
         }
 
         public Task<Otp?> UpdateByEntityFirstAsync(Expression<Func<Otp, bool>> predicate, Action<Otp> updateAction)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IOtpRedisRepository.Insert(Otp otp)
         {
             throw new NotImplementedException();
         }

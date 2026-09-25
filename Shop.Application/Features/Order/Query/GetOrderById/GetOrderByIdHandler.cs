@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Shop.Application.Interfaces;
 
-namespace Shop.Application.Features.Orders.Queries.GetOrderById;
+namespace Shop.Application.Features.Order.Query.GetOrderById;
 
 public class GetOrderByIdHandler
     : IRequestHandler<GetOrderByIdQuery, GetOrderByIdResponse>
@@ -35,7 +35,7 @@ public class GetOrderByIdHandler
         return new GetOrderByIdResponse
         {
             OrderId = order.Id,
-            UserId = order.UserId,
+            UserId = null,
             OrderDate = order.OrderDate,
             TotalPrice = order.TotalPrice,
             Status = order.Status.ToString(),

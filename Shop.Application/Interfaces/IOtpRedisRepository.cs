@@ -10,5 +10,7 @@ namespace Shop.Application.Interfaces
 {
     public interface IOtpRedisRepository : IBaseRepository<Otp>
     {
+        Task<Otp> Getdata(string mobile);
+        Task Insert(Otp otp);
     }
 }

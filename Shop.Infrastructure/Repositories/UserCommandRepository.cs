@@ -9,11 +9,16 @@ using System.Threading.Tasks;
 
 namespace Shop.Infrastructure.Repositories
 {
-    public class UserCommandRepository: IBaseRepository<User> , IUserCommandRepository
+    public class UserCommandRepository: BaseRepository<User> , IUserCommandRepository
     {
         public UserCommandRepository(ShopDbContext context): base(context)
         {
             
+        }
+
+        public Task Insert(User user)
+        {
+            throw new NotImplementedException();
         }
     }
 }

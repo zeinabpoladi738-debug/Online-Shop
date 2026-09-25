@@ -9,7 +9,7 @@ namespace Shop.presentation.Controllers.V1
     
     [ApiController]
    
-    [Route("api/v{v:apiVertion}/Auth")]
+    
     public class AuthController : ControllerBase
     {
         public readonly IMediator _mediator;

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Shop.Application.Interfaces;
 
-namespace Shop.Application.Features.Orders.Queries.GetOrders;
+namespace Shop.Application.Features.Order.Query.GetOrders;
 
 public class GetOrdersHandler
     : IRequestHandler<GetOrdersQuery, GetOrdersResponse>

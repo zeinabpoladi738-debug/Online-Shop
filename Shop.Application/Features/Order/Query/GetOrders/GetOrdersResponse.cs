@@ -1,4 +1,4 @@
-﻿namespace Shop.Application.Features.Orders.Queries.GetOrders;
+﻿namespace Shop.Application.Features.Order.Query.GetOrders;
 
 public class GetOrdersResponse
 {
