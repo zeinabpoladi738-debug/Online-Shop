@@ -1,14 +1,14 @@
-# 🛒 Online Shop
+#  Online Shop
 
 A backend-focused e-commerce application built with **ASP.NET Core** using **Clean Architecture, CQRS, MediatR, Entity Framework Core, and SQL Server**.
 
-## 🚀 Overview
+##  Overview
 
 Online Shop is an e-commerce backend project designed with a clean and maintainable architecture.
 
 The project provides APIs for managing products and shopping baskets and demonstrates modern backend development practices with .NET.
 
-## 🛠️ Technologies
+##  Technologies
 
 * **.NET 8 / ASP.NET Core**
 * **C#**
@@ -22,7 +22,7 @@ The project provides APIs for managing products and shopping baskets and demonst
 * Otp_Token
 * **Swagger / OpenAPI**
 
-## 🏗️ Architecture
+##  Architecture
 
 The project follows a layered architecture inspired by **Clean Architecture** principles.
 
@@ -55,14 +55,15 @@ Online Shop
 
 
 
-## 👩‍💻 Author
+##  Author
 
 **Zeinab**
 
-## 📸 Project Preview
+##  Project Preview
 
 ![Online Shop Mainpage](./mainpage.png)
 ![Online Shop Swager](./swager.png)
+![Online Shop BaseRepository](./baseRepository.png)
 
 Backend Developer | ASP.NET Core | C#
 
